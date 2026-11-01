@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOP_Project
+{
+    internal class PHS
+    {
+        //MAIN MENU OF THE APP
+
+        public string MainMenu()
+        {
+            Console.WriteLine("========================================");
+            Console.WriteLine("========================================");
+            Console.WriteLine("         PROJECT HANDLING SYSTEM        ");
+            Console.WriteLine("========================================");
+            Console.WriteLine("========================================");
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+            Console.WriteLine("                 USER                   ");
+            Console.WriteLine();
+            Console.WriteLine("1.MANAGER");
+            Console.WriteLine("2.EMPLOYEE");
+            Console.WriteLine("3.EXIT");
+            Console.WriteLine("SELECT AN OPTION:");
+            string Option = Console.ReadLine();
+            return Option;
+        } 
+    }
+}
