@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OOP_Project.EMPLOYEE;
+using OOP_Project.MANAGER;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +11,42 @@ namespace OOP_Project
     internal class PHS
     {
         //MAIN MENU OF THE APP
+        static public void user()
+        {            while (true)
+            {
+                Console.Clear();
+                string Option = MainMenu();
 
-        public string MainMenu()
+                if (Option == "1")
+                {
+                    MANAGER_UI mainUI = new MANAGER_UI();
+                    bool check = mainUI.pass();
+                    if (check == true)
+                    {
+                        break;
+                    }
+                }
+                else if (Option == "2")
+                {
+                    EMPLOYEE_UI _employeeui = new EMPLOYEE_UI();
+                    string employeename = _employeeui.ChooseEmployee();
+                    _employeeui.EmployeeDriver(employeename);
+
+                }
+                else if (Option == "3")
+                {
+                    break;
+                }
+                else
+                {
+
+                }
+
+            }
+
+
+        }
+        static public string MainMenu()
         {
             Console.WriteLine("========================================");
             Console.WriteLine("========================================");
@@ -27,6 +63,6 @@ namespace OOP_Project
             Console.WriteLine("SELECT AN OPTION:");
             string Option = Console.ReadLine();
             return Option;
-        } 
+        }
     }
 }

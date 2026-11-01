@@ -38,5 +38,41 @@ namespace OOP_Project.PROJECTS
 
             return $"{Title},{Tasks},{Deadline},{Priority},{Status},{EmployeeName},{Note}";
         }
+        public string GetTitle()
+        {
+            string title = Title;
+            return title;
+        }
+        public string GetTask()
+        {
+            string task = Tasks;
+            return task;
+        }
+        public int GetDeadline()
+        {
+            int deadline = Deadline;
+            return deadline;
+        }
+        public string GetPriority()
+        {
+            string priority = Priority;
+            return priority;
+        }
+        public string GetStatus()
+        {
+            string status = Status;
+            return status;
+        }
+        public string GetEmployeename()
+        {
+            string employeename = EmployeeName;
+            return employeename;
+        }
+        public string GetNote()
+        {
+            string note = Note;
+            return note;
+        }
+
     }
 }

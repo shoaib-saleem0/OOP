@@ -101,6 +101,10 @@ namespace OOP_Project.EMPLOYEE
         }
         public void viewnotes(string employeename)
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================== VIEW NOTES ==========================");
+            Console.WriteLine("================================================================");
             List<Projects_Model> list = _employeelogic.readprojectsdata();
             int count = 0;
             Console.WriteLine("NO. \tTitle\t\tNotes");
@@ -108,7 +112,7 @@ namespace OOP_Project.EMPLOYEE
             {
                 if (model.EmployeeName == employeename)
                 {
-                    Console.WriteLine(count + " \t" + model.Title + "\t" +model.Note);
+                    Console.WriteLine(count + " \t" + model.GetTitle() + "\t" +model.GetNote());
 
 
                 }
@@ -117,6 +121,10 @@ namespace OOP_Project.EMPLOYEE
         }
         public void PendingProjects(string employeename)
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== PENDING PROJECTS ======================");
+            Console.WriteLine("================================================================");
             DisplayList(_employeelogic.pendingprojects(employeename));        }
         public void DisplayList(List<Projects_Model> list)
         {
@@ -127,24 +135,35 @@ namespace OOP_Project.EMPLOYEE
             foreach (Projects_Model model in list)
             {
 
-                Console.WriteLine(count + " " + model.Title + "\t" + model.Tasks + "\t    " + model.Deadline + "\t\t" + model.Priority + "\t\t" + model.Status);
+                Console.WriteLine(count + " " + model.GetTitle() + "\t" + model.GetTask() + "\t    " + model.GetDeadline() + "\t\t" + model.GetPriority() + "\t\t" + model.GetStatus());
 
                 count++;
             }
         }
         public void CompletedProjects(string employeename)
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================= COMPLETED PROJECTS =====================");
+            Console.WriteLine("================================================================");
             DisplayList(_employeelogic.completedprojects(employeename));
         }
         public void ShowNoofProjects(string employeename)
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== ASSIGNED PROJECTS =====================");
+            Console.WriteLine("================================================================");
             Console.WriteLine("The Number Of Projects Assigned To You Are");
             int count = _employeelogic.countprojects(employeename);
             Console.WriteLine(count);
         }
         public void SearchTask(string employeename)
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================= SEARCH BY TASK =======================");
+            Console.WriteLine("================================================================");
             Console.WriteLine("Enter Task to Search");
             string task = Console.ReadLine();
             Projects_Model model = _employeelogic.searchtask(employeename,task);
@@ -155,7 +174,7 @@ namespace OOP_Project.EMPLOYEE
             else
             {
                 Console.WriteLine("Title\t\tTasks\t\t\tDeadline\tPriority\tStatus");
-                Console.WriteLine(model.Title + "\t" + model.Tasks + "\t    " + model.Deadline + "\t\t" + model.Priority + "\t\t" + model.Status);
+                Console.WriteLine(model.GetTitle() + "\t" + model.GetTask() + "\t    " + model.GetDeadline() + "\t\t" + model.GetPriority() + "\t\t" + model.GetStatus());
                 Console.WriteLine("Press Any Key To Continue!");
                 Console.ReadKey();
             }
@@ -164,6 +183,9 @@ namespace OOP_Project.EMPLOYEE
         public void ViewDeadlines(string employeename)
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================== VIEW DEADLINES ======================");
+            Console.WriteLine("================================================================");
             List<Projects_Model> list = _employeelogic.readprojectsdata();
             int count = 0;
             Console.WriteLine("NO. \tTitle\t\tDeadline\tPriority");
@@ -171,7 +193,7 @@ namespace OOP_Project.EMPLOYEE
             {
                 if(model.EmployeeName == employeename)
                 {
-                    Console.WriteLine(count + "\t" + model.Title + "\t" + model.Deadline + "\t\t" + model.Priority);
+                    Console.WriteLine(count + "\t" + model.GetTitle() + "\t" + model.GetDeadline() + "\t\t" + model.GetPriority());
                         
                     
                 }
@@ -181,6 +203,10 @@ namespace OOP_Project.EMPLOYEE
         }
         public void MarkComplete(string employeename)
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== MARK AS COMPLETE ======================");
+            Console.WriteLine("================================================================");
             ViewAssignedProjects(employeename);
             Console.WriteLine("Enter Project No. You Wanna Marked as Complete: ");
             int choice = int.Parse(Console.ReadLine());
@@ -188,6 +214,10 @@ namespace OOP_Project.EMPLOYEE
         }
         public void UpdateStatus(string employeename)
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================= UPDATE TASK STATUS =====================");
+            Console.WriteLine("================================================================");
             ViewAssignedProjects(employeename);
             Console.WriteLine("Enter Project No. To Update Status of: ");
             int choice = int.Parse(Console.ReadLine());
@@ -198,6 +228,11 @@ namespace OOP_Project.EMPLOYEE
 
         public string ChooseEmployee()
         {
+            Console.Clear();
+
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== CHOOSE EMPLOYEE =======================");
+            Console.WriteLine("================================================================");
             ViewEmployees();
             Console.WriteLine("Select Employee NO. To Continue: ");
             int choice = int.Parse(Console.ReadLine());
@@ -217,15 +252,17 @@ namespace OOP_Project.EMPLOYEE
         public void ViewAssignedProjects(string employeename)
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== VIEW ALL PROJECTS =====================");
+            Console.WriteLine("================================================================");
             List<Projects_Model> list = _employeelogic.readprojectsdata();
             int count = 0;
-            Console.WriteLine("NO. \tTitle\t\tTasks\t\t\tDeadline\tPriority\tStatus");
+            Console.WriteLine("NO. \tTitle\t\tTasks\t\tDeadline\tPriority\tStatus");
             foreach (Projects_Model model in list)
             {
                 if(model.EmployeeName == employeename)
                 {
-                    Console.WriteLine(count + " " + model.Title + "\t" + model.Tasks + "\t    " + model.Deadline + "\t\t" + model.Priority + "\t\t" + model.Status);
-                        
+                    Console.WriteLine(count + " " + model.GetTitle() + "\t" + model.GetTask() + "\t    " + model.GetDeadline() + "\t\t" + model.GetPriority() + "\t\t" + model.GetStatus());
                     
                 }
                 count++;
@@ -234,13 +271,12 @@ namespace OOP_Project.EMPLOYEE
         }
         public void ViewEmployees()
         {
-            Console.Clear();
-            List<EMPLOYEE_MODEL> list = _employeerepo.ReadAllData();
+            List<EMPLOYEE_MODEL> list = _employeelogic.readalldata();
             int count = 0;
             Console.WriteLine("NO.\tEmployeeID\tNAME");
             foreach (EMPLOYEE_MODEL each in list)
             {
-                Console.WriteLine(count + "\t" + each.EmployeeID + "\t\t" + each.Name);
+                Console.WriteLine(count + "\t" + each.GetEmployeeID() + "\t\t" + each.GetName());
                 count++;
             }
             

@@ -149,7 +149,6 @@ namespace OOP_Project.MANAGER
         }
         public void DisplayData(List<Projects_Model> publicModel )
         {
-            Console.Clear();
             int count = 0;
             Console.WriteLine("NO. \tTitle\t\tTasks\t\tDeadline\tPriority\tStatus\t\tEmployeeName\tNOTES");
             foreach (Projects_Model model in publicModel)
@@ -157,20 +156,28 @@ namespace OOP_Project.MANAGER
 
 
 
-                Console.WriteLine(count + " " + model.Title + "\t" + model.Tasks + "\t    " + model.Deadline + "\t\t" + model.Priority + "\t\t" + model.Status + "\t\t" +
-                    model.EmployeeName + "\t\t" + model.Note);
+                Console.WriteLine(count + " " + model.GetTitle() + "\t" + model.GetTask() + "\t    " + model.GetDeadline() + "\t\t" + model.GetPriority() + "\t\t" + model.GetStatus() + "\t\t" +
+                    model.GetEmployeename() + "\t\t" + model.GetNote());
                 count++;
             }
 
         }
         public void EmployeesList()
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== LIST OF EMPLOYEES =====================");
+            Console.WriteLine("================================================================");
             ViewEmployees();
             Console.WriteLine("Press Any Key To Continue!");
             Console.ReadKey();
         }
         public void DeleteEmployee()
         {
+            Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== DELETE EMPLOYEE =======================");
+            Console.WriteLine("================================================================");
             ViewEmployees();
             Console.WriteLine("Select Employee NO. to Delete: ");
             int choice = int.Parse(Console.ReadLine());
@@ -178,6 +185,9 @@ namespace OOP_Project.MANAGER
         }
         public void ShowallProjects()
         {
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== LIST OF PROJECTS ======================");
+            Console.WriteLine("================================================================");
             ViewList();
             Console.WriteLine("Press Any Key To Continue!");
             Console.ReadKey();
@@ -185,6 +195,9 @@ namespace OOP_Project.MANAGER
         public void ViewAssignedTask()
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================= ASSIGNED TASKS =======================");
+            Console.WriteLine("================================================================");
             Console.WriteLine("Following are the assigned tasks: ");
             DisplayData(_managerlogic.assignedprojects());
             Console.WriteLine("Press Any Key To Continue!");
@@ -192,12 +205,15 @@ namespace OOP_Project.MANAGER
         }
         public void ViewNotes() {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================== VIEW NOTES ==========================");
+            Console.WriteLine("================================================================");
             List<Projects_Model> list = _managerlogic.readalldata();
             Console.WriteLine("Title\t\t\t" + "NOTES");
             foreach (Projects_Model each in list)
             {
                 
-                Console.WriteLine(each.Title+"\t      "+each.Note);
+                Console.WriteLine(each.GetTitle()+"\t      "+each.GetNote());
             }
             Console.WriteLine("Press Any Key To Continue!");
             Console.ReadKey();
@@ -205,6 +221,9 @@ namespace OOP_Project.MANAGER
         public void UpdateNote()
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== ADD/UPDATE NOTES ======================");
+            Console.WriteLine("================================================================");
             ViewList();
             Console.WriteLine("Select Project NO. You Wanna Update Note of: ");
             int choice = int.Parse(Console.ReadLine());
@@ -214,7 +233,7 @@ namespace OOP_Project.MANAGER
         }
         public void ViewEmployees()
         {
-            Console.Clear();
+           
             List<EMPLOYEE_MODEL> list = _employeerepo.ReadAllData();
             int count = 0;
             Console.WriteLine("NO.\tEmployeeID\tNAME\tEMAIL\t\t\t\t\tDesignation");
@@ -228,6 +247,9 @@ namespace OOP_Project.MANAGER
         public void AddEmployee()
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================== ADD EMPLOYEE ========================");
+            Console.WriteLine("================================================================");
             EMPLOYEE_MODEL model = EmployeeInput();
             _managerlogic.addemployee(model);
 
@@ -249,6 +271,9 @@ namespace OOP_Project.MANAGER
         public void AssignTo()
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================= ASSIGN PROJECT =======================");
+            Console.WriteLine("================================================================");
             ViewList();
             Console.WriteLine("Select Project NO. You Wanna Assign: ");
             int choice = int.Parse(Console.ReadLine());
@@ -260,6 +285,9 @@ namespace OOP_Project.MANAGER
         public void DeleteProject()
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================= DELETE PROJECT =======================");
+            Console.WriteLine("================================================================");
             ViewList();
             Console.WriteLine("Enter Project NO. to DELETE: ");
             int choice = int.Parse(Console.ReadLine());
@@ -268,11 +296,20 @@ namespace OOP_Project.MANAGER
         }
         public void SortbyDeadline()
         {
+            Console.Clear();
             _managerlogic.sortbydeadline();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== SORT BY DEADLINES =====================");
+            Console.WriteLine("================================================================");
+            ViewList();
         }
         public void UpdateProject()
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================= UPDATE PROJECT =======================");
+            Console.WriteLine("================================================================");
+            
             ViewList();
             Console.WriteLine("Enter Project NO. to Update: ");
             int choice = int.Parse(Console.ReadLine());
@@ -284,6 +321,9 @@ namespace OOP_Project.MANAGER
         public void UpdateTask()
         {
             Console.Clear();
+            Console.WriteLine("================================================================");
+            Console.WriteLine("========================== UPDATE TASK =========================");
+            Console.WriteLine("================================================================");
             ViewList();
             Console.WriteLine("Enter Project NO. to Update Task: ");
             int choice = int.Parse(Console.ReadLine());
@@ -295,13 +335,16 @@ namespace OOP_Project.MANAGER
         public void AddProject()
         {
             Console.Clear();
+
+            Console.WriteLine("================================================================");
+            Console.WriteLine("======================== CREATE PROJECT ========================");
+            Console.WriteLine("================================================================");
             Projects_Model data = TakeInput();
             _managerlogic.saveproject(data);
         }
         
         public Projects_Model TakeInput()
         {
-            Console.Clear();
 
             Console.WriteLine("Enter details about Project: ");
             Console.WriteLine("Enter Title");
@@ -333,7 +376,7 @@ namespace OOP_Project.MANAGER
         
         public void ViewList()
         {
-            Console.Clear();
+            
             List<Projects_Model> publicModel = _managerlogic.readalldata();
             int count = 0;
             Console.WriteLine("NO. \tTitle\t\tTasks\t\tDeadline\tPriority\tStatus\t\tEmployeeName\tNOTES");
@@ -342,8 +385,8 @@ namespace OOP_Project.MANAGER
 
                 
 
-                Console.WriteLine(count+" "+model.Title+"\t"+model.Tasks+"\t    "+model.Deadline+"\t\t"+model.Priority+"\t\t"+model.Status+"\t\t"+
-                    model.EmployeeName+"\t\t"+model.Note);
+                Console.WriteLine(count+" "+model.GetTitle()+"\t"+model.GetTask()+"\t    "+model.GetDeadline()+"\t\t"+model.GetPriority()+"\t\t"+model.GetStatus()+"\t\t"+
+                    model.GetEmployeename()+"\t\t"+model.GetNote());
                 count++;
             }
             

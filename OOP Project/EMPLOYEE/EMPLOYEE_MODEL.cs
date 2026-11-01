@@ -20,6 +20,26 @@ namespace OOP_Project.EMPLOYEE
             Email = email;
             Designation = designation;
         }
+        public string GetEmployeeID()
+        {
+            string employeeid = EmployeeID;
+            return employeeid;
+        }
+        public string GetName()
+        {
+            string name = Name;
+            return name;
+        }
+        public string GetEmail()
+        {
+            string email = Email;
+            return email;
+        }
+        public string GetDesignation()
+        {
+            string designation = Designation;
+            return designation;
+        }
         public override string ToString()
         {
             return $"{EmployeeID},{Name},{Email},{Designation}";
