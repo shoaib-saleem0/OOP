@@ -16,9 +16,13 @@ namespace OOP_Project.MANAGER
         MANAGER_LOGIC _managerlogic = new MANAGER_LOGIC();
         Projects_Repository _projectsrepo = new Projects_Repository();
         EMPLOYEE_REPO _employeerepo = new EMPLOYEE_REPO();
+        ManagerModel _managermodel = new ManagerModel();
         public string ManagerMenu()
         {
             Console.Clear();
+            Console.WriteLine("                 WELCOME                 ");
+            Console.WriteLine("========================================");
+            Console.WriteLine($"                 {_managermodel.Name}     ");
             Console.WriteLine("========================================");
             Console.WriteLine("========================================");
             Console.WriteLine("              MANAGER MENU              ");

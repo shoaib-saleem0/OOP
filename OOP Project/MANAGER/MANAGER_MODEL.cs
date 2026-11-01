@@ -12,7 +12,7 @@ namespace OOP_Project.MANAGER
     {
         private string Admin = "shoaib";
         private string Pass = "123";
-        public string Name;
+        public string Name = "SHOAIB";
 
 
         public string getAdmin()
