@@ -6,12 +6,78 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace OOP_Project.MANAGER
 {
     internal class MANAGER_LOGIC
     {
+        
         ManagerModel _managermodel = new ManagerModel();
+        public List<Projects_Model> statusfilter(List<Projects_Model> list, string status)
+        {
+            List<Projects_Model> arranged = new List<Projects_Model>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                string Status = list[i].Status.ToLower();
+                if (Status == status.ToLower())
+                {
+                    arranged.Add(list[i]);
+                }
+            }
+            return arranged;
+        }
+        public List<Projects_Model> rangefilter(List<Projects_Model> list, string maxs,string mins)
+        {
+            List<Projects_Model> arranged = new List<Projects_Model>();
+            int max = int.Parse(maxs);
+            int min = int.Parse(mins);
+            for (int i=0; i < list.Count; i++)
+            {
+                if (list[i].Deadline >=min && list[i].Deadline >= max)
+                {
+                    arranged.Add(list[i]);
+                }
+            }
+            return arranged;
+        }
+        public List<Projects_Model> namefilter(List<Projects_Model> list, string Title)
+        {
+            string name = Title;
+            List<Projects_Model> arranged = new List<Projects_Model>();
+            int count = name.Length;
+            
+            for (int q = 0; q < list.Count; q++)
+            {
+                string title = list[q].Title.ToLower();
+                int ind = 0;
+                int check = 0;
+                for (int i = 0; i < title.Length; i++)
+                {
+
+                    
+                    if (count == check)
+                    {
+                        arranged.Add(list[i]);
+                        break;
+                    }
+                    if (title[i] == name[ind])
+                    {
+                        check++;
+                        ind++;
+                    }
+                    else
+                    {
+                        check = 0;
+                        ind = 0;
+                        
+                    }
+
+                }
+
+            }
+            return arranged;
+        }
         public bool pass(string admin,string pass)
         {
            

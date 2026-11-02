@@ -1,9 +1,11 @@
-﻿using OOP_Project.EMPLOYEE;
+﻿using Microsoft.SqlServer.Server;
+using OOP_Project.EMPLOYEE;
 using OOP_Project.PROJECTS;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading;
@@ -42,6 +44,7 @@ namespace OOP_Project.MANAGER
             Console.WriteLine("11.VIEW NOTES");
             Console.WriteLine("12.VIEW ASSIGNED TASKS");
             Console.WriteLine("13.DELETE EMPLOYEE");
+            Console.WriteLine("14.THREE FILTER");
             Console.WriteLine("14.EXIT");
             Console.WriteLine("SELECT AN OPTION: (1-13)");
             string Option = Console.ReadLine();
@@ -141,11 +144,88 @@ namespace OOP_Project.MANAGER
                     }
                     else if (option == "14")
                     {
-                        break;
-                    }
+                    Filter();
+                }
+                else if(option == "15")
+                {
+                    break;
+                }
                 }
 
             
+        }
+        public void Filter()
+        {
+            Console.WriteLine("Enter Title: ");
+            string title = Console.ReadLine();
+            Console.WriteLine("Enter Range: ");
+            Console.Write("Enter Minimum Range: ");
+            string min = Console.ReadLine();
+            Console.Write("Enter Maximum Range: ");
+            string max = Console.ReadLine();
+            Console.WriteLine("Enter Status: ");
+            string status = Console.ReadLine();
+            List<Projects_Model> list = _managerlogic.readalldata();
+           list = filterDriver(title,max,min,status,list);
+
+           
+            
+            DisplayData(list);
+            Console.ReadKey();
+
+
+
+        }
+        public List<Projects_Model> filterDriver(string title,string max, string min, string status,List<Projects_Model> list)
+        {
+            List<Projects_Model> arranged = new List<Projects_Model>();
+            if (min == "" && max=="" && title == "")
+            {
+                arranged = _managerlogic.statusfilter(list, status);
+            }
+            else if (status == "" && title == "")
+            {
+                arranged = _managerlogic.rangefilter(list, max, min);
+            }else if (status =="" && min ==""&&max =="")
+            {
+
+            }
+            else if (title == "")
+            {
+               arranged = _managerlogic.statusfilter(list,status);
+               arranged = _managerlogic.rangefilter(list,max,min);
+            }else if(max == "" || min == "")
+            {
+                arranged = _managerlogic.statusfilter(list, status);
+                arranged = _managerlogic.namefilter(list,title);
+            }else if(status == "")
+            {
+                arranged = _managerlogic.rangefilter(list, max, min); 
+                arranged = _managerlogic.namefilter(list, title);
+
+            }
+            return arranged;
+        }
+        public void arrangealpha()
+        {
+            List<Projects_Model> list = _projectsrepo.ReadAllData();
+            for (int i = 0; i < list.Count-1; i++)
+            {
+                for (int q = i+1; q < list.Count-1; q++)
+                {
+                    string A = list[i].Title.ToLower();
+                    string B = list[q].Title.ToLower();
+
+                    if (A[0] > B[0])
+                    {
+                        Projects_Model temp = list[i];
+                        list[i] = list[q];
+                        list[q] = temp;
+                    }
+                }
+            }
+            DisplayData(list);
+            Console.ReadKey();
         }
         public void DisplayData(List<Projects_Model> publicModel )
         {
